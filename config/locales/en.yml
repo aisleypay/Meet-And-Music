@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  faker:
+    address:
+      default_time_zone: ['America/New_York']
+      default_country_code: ["US"]
+      state: ['New York']
+      default_country: [United States of America]
+      postcode: ['#####']
