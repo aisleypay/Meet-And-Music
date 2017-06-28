@@ -1,5 +1,5 @@
 class Api::V1::ArtistsController < ApplicationController
-  # before_action :authorize_user!
+  before_action :authorize_user!, only: [:create, :update, :destroy]
 
   def index
     artists = Artist.all
@@ -10,7 +10,7 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def create
-    artist = Artist.create(artist_params)
+    artist = Artist.find_or_create_by(artist_params)
     render json: artist
   end
 
@@ -39,15 +39,14 @@ class Api::V1::ArtistsController < ApplicationController
   def artist_params
     params.require(:artist).permit(:id,
                                    :name,
-                                   :username,
-                                   :password,
                                    :state,
                                    :zipcode,
                                    :age,
                                    :setList,
                                    :experience_in_years,
                                    :genres_attributes => [:name],
-                                   :instruments_attributes => [:name]
+                                   :instruments_attributes => [:name],
+                                   :user_attributes => [:id, :username, :password]
                                   )
   end
 end

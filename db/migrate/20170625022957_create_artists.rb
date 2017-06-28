@@ -9,6 +9,8 @@ class CreateArtists < ActiveRecord::Migration[5.1]
       t.string :setList
       t.integer :age
       t.integer :experience_in_years
+      t.boolean :looking_for_band
+      t.boolean :looking_for_musicians
       t.references :user
 
       t.timestamps

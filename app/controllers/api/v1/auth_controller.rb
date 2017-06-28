@@ -16,7 +16,6 @@ class Api::V1::AuthController < ApplicationController
   def create
     user = User.find_by(username: params[:username])
     if user.present? && user.authenticate(params[:password])
-      byebug
       render json: {
         id: user.id,
         username: user.username,

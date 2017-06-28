@@ -28,16 +28,23 @@ genres.each do |g|
   Genre.create(name: g)
 end
 
-instruments = %w[
-  Keyboards
-  Vocals
-  Guitar
-  Drums
-  Piano
-  Percussion
-  Cello
-  Violin
+instruments = [
+  'Keyboards',
+  'Vocals',
+  'Guitar',
+  'Drums',
+  'Piano',
+  'Percussion',
+  'Cello',
+  'Violin',
+  'Trombone',
+  'Flute',
+  'Bass Guitar'
 ]
+
+instruments.each do |i|
+  Instrument.create(name: i)
+end
 
 ny_zipcodes = [
 00501,
@@ -2226,143 +2233,56 @@ ny_zipcodes = [
 14905,
 14925
 ]
-# Band
-User.create(username: 'alice_in_chains',
-            password: 'chains',
-            classification: 'band',
-            bands_attributes: [{
-              name: 'Alice in Chains',
-              state: 'Washington',
-              zipcode: 98101,
-              genres_attributes: [
-                { name: 'Alternative Metal' },
-                { name: 'Grunge' },
-                { name: 'Heavy Metal' },
-                { name: 'Rock' }
-              ]
-            }])
 
-User.create(username: 'slayer',
-            password: 'deathAngel124',
-            classification: 'band',
-            bands_attributes: [{
-              name: 'Slayer',
-              state: 'California',
-              zipcode: 90255,
-              genres_attributes: [
-                { name: 'Thrash Metal' },
-                { name: 'Rock' }
-              ]
-            }])
+rand_boolean = [true, false]
 
-User.create(username: 'stairway_to_heaven_420',
-            password: 'NoQuarter123',
-            classification: 'band',
-            bands_attributes: [{
-              name: 'Led Zeppelin',
-              state: 'New York',
-              zipcode: 10033,
-              genres_attributes: [
-                { name: 'Hard Rock' },
-                { name: 'Blues Rock' },
-                { name: 'Folk Rock' },
-                { name: 'Heavy Metal' },
-                { name: 'Rock' }
-              ]
-            }])
+100.times do
+  a = Artist.new(
+    name: Faker::Name.name,
+    state: Faker::Address.state,
+    zipcode: ny_zipcodes.sample,
+    looking_for_musicians: rand_boolean.sample,
+    looking_for_band: true,
+    age: Faker::Number.between(18, 90),
+    experience_in_years: Faker::Number.between(1, 18),
+    user_attributes: {
+      username: (Faker::Space.nebula + Faker::Superhero.name).split(' ').join('_'),
+      password: 'faker'
+    }
+  )
 
-User.create(username: 'WeAreForeigner',
-            password: 'woman',
-            classification: 'band',
-            bands_attributes: [{
-              name: 'Foreigner',
-              state: 'New York',
-              zipcode: 10005,
-              genres_attributes: [
-                { name: 'Hard Rock' },
-                { name: 'Pop Rock' },
-                { name: 'Soft Rock' },
-              ]
-            }])
+  a.save
+  a.genres << Genre.all.sample
+  a.genres << Genre.all.sample
+  a.genres << Genre.all.sample
 
-# Artists
-User.create(username: 'layne_staley',
-            password: 'maninaBox12',
-            classification: 'artist',
-            artists_attributes: [{
-              name: 'Layne Staley',
-              state: 'Washington',
-              zipcode: 98154,
-              age: 21,
-              experience_in_years: 4,
-              genres_attributes: [
-                { name: 'Alternative Metal' },
-                { name: 'Grunge' },
-                { name: 'Heavy Metal' },
-                { name: 'Rock' }
-              ],
-              instruments_attributes: [
-                { name: 'Vocals' },
-                { name: 'Guitar' },
-                { name: 'Drums' }
-              ]
-            }])
+  a.instruments << Instrument.all.sample
+  a.instruments << Instrument.all.sample
+  a.instruments << Instrument.all.sample
 
-User.create(username: 'frankie_ocean',
-            password: 'orange_juice',
-            classification: 'artist',
-            artists_attributes: [{
-              name: 'Frank Ocean',
-              state: 'California',
-              zipcode: 90801,
-              age: 29,
-              experience_in_years: 17,
-              genres_attributes: [
-                { name: 'R&B' },
-                { name: 'Soul' }
-              ],
-              instruments_attributes: [
-                { name: 'Keyboards' },
-                { name: 'Vocals' },
-                { name: 'Guitar' }
-              ]
-            }])
-
-50.times do
-  User.create(username: Faker::Name.name.split(' ').join('_'),
-              password: 'faker',
-              classification: 'artist',
-              artists_attributes: [{
-                name: Faker::Name.name,
-                state: Faker::Address.state,
-                zipcode: ny_zipcodes.sample,
-                age: Faker::Number.between(18, 90),
-                experience_in_years: Faker::Number.between(1, 18),
-                genres_attributes: [
-                  { name: genres.sample },
-                  { name: genres.sample },
-                  { name: genres.sample }
-                ],
-                instruments_attributes: [
-                  { name: instruments.sample },
-                  { name: instruments.sample },
-                  { name: instruments.sample }
-                ]
-              }])
+  a.save
 end
-20.times do
-  User.create(username: Faker::Internet.user_name,
-              password: 'faker',
-              classification: 'band',
-              bands_attributes: [{
-                name: Faker::Book.title,
-                state: Faker::Address.state,
-                zipcode: ny_zipcodes.sample,
-                genres_attributes: [
-                  { name: genres.sample },
-                  { name: genres.sample },
-                  { name: genres.sample },
-                  { name: genres.sample }
-                ]
-              }])
+
+10.times do
+  b = Band.new(
+    name: Faker::Book.title + Faker::Space.moon,
+    state: Faker::Address.state,
+    zipcode: ny_zipcodes.sample,
+    radius_preference: rand(15..30),
+    looking_for_musicians: true,
+    user_attributes: {
+      username: Faker::Internet.user_name + Faker::Space.constellation,
+      password: 'faker'
+    }
+  )
+
+  b.save
+  b.genres << Genre.all.sample
+  b.genres << Genre.all.sample
+  b.genres << Genre.all.sample
+
+  BandInstrumentPreference.create(instrument_id: Instrument.all.sample.id, band_id: b.id)
+  BandInstrumentPreference.create(instrument_id: Instrument.all.sample.id, band_id: b.id)
+  BandInstrumentPreference.create(instrument_id: Instrument.all.sample.id, band_id: b.id)
+  b.save
 end

@@ -1,6 +1,4 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :bands
-  has_many :artists
-  accepts_nested_attributes_for :bands, :artists
+  belongs_to :meta, polymorphic: true, optional: true
 end
