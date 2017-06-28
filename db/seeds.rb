@@ -2236,7 +2236,7 @@ ny_zipcodes = [
 
 rand_boolean = [true, false]
 
-100.times do
+1200.times do
   a = Artist.new(
     name: Faker::Name.name,
     state: Faker::Address.state,
@@ -2268,7 +2268,7 @@ end
     name: Faker::Book.title + Faker::Space.moon,
     state: Faker::Address.state,
     zipcode: ny_zipcodes.sample,
-    radius_preference: rand(15..30),
+    radius_preference: rand(20..30),
     looking_for_musicians: true,
     user_attributes: {
       username: Faker::Internet.user_name + Faker::Space.constellation,

@@ -36,7 +36,7 @@ class Api::V1::BandsController < ApplicationController
     band = Band.find(params[:id])
     band_coor = [band.latitude, band.longitude]
     band_genres = band.genres.collect { |g| g.name }
-    instruments_needed = band.band_instrument_preferences.collect { |i| Instrument.find_by_id(i.id).name }
+    instruments_needed = band.band_instrument_preferences.collect { |i| Instrument.find_by_id(i.instrument.id).name }
     recommendations = Artist.recommendedArtists(band_coor,
                                                 band.radius_preference,
                                                 band_genres,
