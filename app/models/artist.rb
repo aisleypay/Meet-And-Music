@@ -1,12 +1,12 @@
 class Artist < ApplicationRecord
   geocoded_by :zipcode
   after_validation :geocode
+  has_one :user, as: :meta, dependent: :destroy
   has_many :user_preferences, as: :beta, dependent: :destroy
   has_many :artist_instruments
   has_many :instruments, through: :artist_instruments
   has_many :user_genres
   has_many :genres, through: :user_genres
-  has_one :user, as: :meta, dependent: :destroy
   accepts_nested_attributes_for :user, :genres, :instruments
 
   def self.search_artists_by_radius(coordinates, radius)
@@ -20,7 +20,8 @@ class Artist < ApplicationRecord
     end
   end
 
-  def self.selected_by_instruments_artists(artists, instruments_needed) #instruments are an array
+  # instruments are an array
+  def self.selected_by_instruments_artists(artists, instruments_needed)
     artists.select do |a|
       artist_instruments = a.instruments.collect(&:name)
       artist_instruments.any? { |instrument| instruments_needed.include?(instrument) }

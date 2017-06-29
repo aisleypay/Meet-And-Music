@@ -47,7 +47,7 @@ class Api::V1::BandsController < ApplicationController
 
   private
 
-  def artist_params
+  def band_params
     params.require(:band).permit(:id,
                                  :name,
                                  :state,

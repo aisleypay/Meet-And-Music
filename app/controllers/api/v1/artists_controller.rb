@@ -1,13 +1,12 @@
 class Api::V1::ArtistsController < ApplicationController
-  before_action :authorize_user!, only: [:create, :update, :destroy]
+  before_action :authorize_user!, only: %i[create update destroy]
 
   def index
     artists = Artist.all
     render json: artists
   end
 
-  def new
-  end
+  def new; end
 
   def create
     artist = Artist.find_or_create_by(artist_params)
@@ -19,8 +18,7 @@ class Api::V1::ArtistsController < ApplicationController
     render json: artist
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     artist = Artist.find(params[:id])
@@ -44,9 +42,8 @@ class Api::V1::ArtistsController < ApplicationController
                                    :age,
                                    :setList,
                                    :experience_in_years,
-                                   :genres_attributes => [:name],
-                                   :instruments_attributes => [:name],
-                                   :user_attributes => [:id, :username, :password]
-                                  )
+                                   genres_attributes: %i[id name],
+                                   instruments_attributes: %i[id name],
+                                   user_attributes: %i[id username password])
   end
 end

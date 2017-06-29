@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :users
       resources :genres, only: [:create]
       resources :instruments, only: [:create]
+      resources :decisions, only: [:create]
     end
   end
 end
