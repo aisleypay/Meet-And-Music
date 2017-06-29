@@ -3,11 +3,11 @@ class Artist < ApplicationRecord
   after_validation :geocode
   has_one :user, as: :meta, dependent: :destroy
   has_many :user_preferences, as: :beta, dependent: :destroy
-  has_many :artist_instruments
+  has_many :artist_instruments, dependent: :destroy
   has_many :instruments, through: :artist_instruments
-  has_many :user_genres
+  has_many :user_genres, dependent: :destroy
   has_many :genres, through: :user_genres
-  accepts_nested_attributes_for :user, :genres, :instruments
+  accepts_nested_attributes_for :user, :genres, :instruments, :user_genres, :artist_instruments
 
   def self.search_artists_by_radius(coordinates, radius)
     Artist.near(coordinates, radius)

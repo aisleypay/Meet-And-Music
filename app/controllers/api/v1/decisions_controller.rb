@@ -2,11 +2,9 @@ class Api::V1::DecisionsController < ApplicationController
   before_action :authorize_user!
 
   def create
-    decider = User.find_by_id(decision_params['decider_id']).id
-    chosen = User.find_by_id(decision_params['chosen_id']).id
-    decision = Decision.create(decider_id: decider,
-                               chosen_id: chosen,
-                               status: decision_params['status'])
+    decider = User.find_by_id(decision_params[:decider_attributes][:id])
+    chosen = User.find_by_id(decision_params[:chosen_id].to_i)
+    decision = Decision.create(decider: decider, chosen: chosen, status: decision_params[:status])
     render json: decision
   end
 
@@ -15,9 +13,9 @@ class Api::V1::DecisionsController < ApplicationController
   def decision_params
     params.require(:decision).permit(
       :id,
-      :decider_id,
+      :status,
       :chosen_id,
-      :status
+      decider_attributes: %i[id name state zipcode setList user_attributes]
     )
   end
 end

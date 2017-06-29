@@ -53,7 +53,8 @@ class Api::V1::BandsController < ApplicationController
                                  :state,
                                  :zipcode,
                                  :setList,
-                                 genres_attributes: %i[id name],
+                                 band_instrument_preferences_attributes: %i[id instrument_id name],
+                                 user_genres_attributes: %i[id genre_id],
                                  user_attributes: %i[id username password])
   end
 end

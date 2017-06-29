@@ -8,8 +8,8 @@ Rails.application.routes.draw do
       resources :artists
       resources :bands
       resources :users
-      resources :genres, only: [:create]
-      resources :instruments, only: [:create]
+      resources :instruments, only: [:index]
+      resources :genres, only: [:index]
       resources :decisions, only: [:create]
     end
   end
