@@ -2,7 +2,6 @@ class Artist < ApplicationRecord
   geocoded_by :zipcode
   after_validation :geocode
   has_one :user, as: :meta, dependent: :destroy
-  has_many :user_preferences, as: :beta, dependent: :destroy
   has_many :artist_instruments, dependent: :destroy
   has_many :instruments, through: :artist_instruments
   has_many :user_genres, dependent: :destroy
