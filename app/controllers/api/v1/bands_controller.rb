@@ -32,19 +32,21 @@ class Api::V1::BandsController < ApplicationController
     render json: band
   end
 
-  def searchArtists
+  def recommendedArtists
     band = Band.find(params[:id])
     band_coor = [band.latitude, band.longitude]
-    band_genres = band.genres.collect { |g| g.name }
+    band_genres = band.genres.collect(&:name)
     instruments_needed = band.band_instrument_preferences.collect { |i| Instrument.find_by_id(i.instrument.id).name }
     recommendations = Artist.recommendedArtists(band_coor,
                                                 band.radius_preference,
                                                 band_genres,
                                                 instruments_needed)
-
     render json: recommendations
   end
 
+  def searchBands
+
+  end
   private
 
   def band_params

@@ -1,5 +1,5 @@
 class Api::V1::ArtistsController < ApplicationController
-  before_action :authorize_user!, only: %i[update destroy]
+  before_action :authorize_user!, only: %i[create update destroy]
 
   def index
     artists = Artist.all
@@ -33,15 +33,47 @@ class Api::V1::ArtistsController < ApplicationController
     render json: artist
   end
 
-  def searchArtists
+  def recommendedBands
     artist = Artist.find(params[:id])
     artist_coor = [artist.latitude, artist.longitude]
     artist_instruments = artist.instruments.collect(&:name)
     recommendations = Band.recommendedBands(artist_coor,
                                             artist.radius_preference,
                                             artist_instruments)
-
     render json: recommendations
+  end
+
+  def searchArtists
+    if request.headers['radius'] == '0' && request.headers['zipcode'] == ''
+      if request.headers['instruments'] != ''
+        instru_artists = geo_artists.select do |a|
+          artist_instruments = a.instruments.collect(&:name)
+          artist_instruments.any? { |instrument| request.headers['instruments'] == instrument }
+        end
+        if request.headers['genre'] != ''
+          genre_artists = instru_artists.select do |a|
+            artist_genres = a.genres.collect(&:name)
+            artist_genres.any? { |genre| genre == request.headers['genre'] }
+          end
+        end
+      end
+    else
+      geo_artists = Artists.near(request.headers['zipcode'], request.headers['radius'])
+      if request.headers['instruments'] != ''
+        instru_artists = geo_artists.select do |a|
+          artist_instruments = a.instruments.collect(&:name)
+          artist_instruments.any? { |instrument| request.headers['instruments'] == instrument }
+        end
+        if request.headers['genre'] != ''
+          genre_artists = instru_artists.select do |a|
+            artist_genres = a.genres.collect(&:name)
+            artist_genres.any? { |genre| genre == request.headers['genre'] }
+          end
+        end
+      end
+    end
+
+    render json: genre_artists
   end
 
   private

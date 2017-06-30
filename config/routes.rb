@@ -4,8 +4,10 @@ Rails.application.routes.draw do
       post '/auth', to: 'auth#create'
       get '/current_user', to: 'auth#show'
       get '/users', to: 'auth#index'
-      get 'bands/:id/searchArtists', to: 'bands#searchArtists'
-      get 'artists/:id/searchBands', to: 'artists#searchBands'
+      get 'bands/:id/recommended-artists', to: 'bands#recommendedArtists'
+      get 'artists/:id/recommended-Bands', to: 'artists#recommendedBands'
+      get 'bands/search-bands', to: 'bands#searchBands'
+      get 'artists/search-artists', to: 'artists#searchArtists'
       resources :artists
       resources :bands
       resources :users

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170627201220) do
   create_table "artists", force: :cascade do |t|
     t.string "name"
     t.string "state"
-    t.integer "zipcode"
+    t.string "zipcode"
     t.float "latitude"
     t.float "longitude"
     t.string "setList"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170627201220) do
     t.integer "experience_in_years"
     t.boolean "looking_for_band"
     t.boolean "looking_for_musicians"
+    t.integer "radius_preference"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,7 +54,7 @@ ActiveRecord::Schema.define(version: 20170627201220) do
   create_table "bands", force: :cascade do |t|
     t.string "name"
     t.string "state"
-    t.integer "zipcode"
+    t.string "zipcode"
     t.float "latitude"
     t.float "longitude"
     t.integer "radius_preference"

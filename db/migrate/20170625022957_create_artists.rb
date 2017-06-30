@@ -3,7 +3,7 @@ class CreateArtists < ActiveRecord::Migration[5.1]
     create_table :artists do |t|
       t.string :name
       t.string :state
-      t.integer :zipcode
+      t.string :zipcode
       t.float :latitude
       t.float :longitude
       t.string :setList

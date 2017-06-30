@@ -11,17 +11,15 @@ class Band < ApplicationRecord
     Band.near(coordinates, radius)
   end
 
-  def self.selected_by_instruments_artists(bands, artist_instruments)
-    bands.map do |b|
+  def self.selected_by_needed_instruments(bands, artist_instruments)
+    bands.select do |b|
       b_preferred_instruments = b.band_instrument_preferences.collect { |p| p.instrument.name }
-      if artist_instruments.any? { |a_instrument| b_preferred_instruments.include?(a_instrument) }
-        b
-      end
+       artist_instruments.any? { |a_instrument| b_preferred_instruments.include?(a_instrument) }
     end
   end
 
   def self.recommendedBands(coordinates, radius, artist_instruments)
     geographically_selected_bands = search_bands_by_radius(coordinates, radius)
-    selected_by__needed_instruments(geographically_selected_bands, artist_instruments)
+    selected_by_needed_instruments(geographically_selected_bands, artist_instruments)
   end
 end

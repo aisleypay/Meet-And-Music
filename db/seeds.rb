@@ -2236,13 +2236,14 @@ ny_zipcodes = [
 
 rand_boolean = [true, false]
 
-1200.times do
+20.times do
   a = Artist.new(
     name: Faker::Name.name,
-    state: Faker::Address.state,
-    zipcode: ny_zipcodes.sample,
+    state: 'New Jersey',
+    zipcode: '07067',
     looking_for_musicians: rand_boolean.sample,
     looking_for_band: true,
+    radius_preference: rand(20..30),
     age: Faker::Number.between(18, 90),
     experience_in_years: Faker::Number.between(1, 18),
     user_attributes: {
@@ -2266,8 +2267,8 @@ end
 10.times do
   b = Band.new(
     name: Faker::Book.title + Faker::Space.moon,
-    state: Faker::Address.state,
-    zipcode: ny_zipcodes.sample,
+    state: 'New Jersey',
+    zipcode: '07067',
     radius_preference: rand(20..30),
     looking_for_musicians: true,
     user_attributes: {
