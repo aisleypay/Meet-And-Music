@@ -15,6 +15,7 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def show
+    # break out find into a separate method
     artist = Artist.find(params[:id])
     render json: artist
   end
