@@ -37,43 +37,21 @@ class Api::V1::ArtistsController < ApplicationController
     artist = Artist.find(params[:id])
     artist_coor = [artist.latitude, artist.longitude]
     artist_instruments = artist.instruments.collect(&:name)
+    artist_genres = artist.genres.collect(&:name)
     recommendations = Band.recommendedBands(artist_coor,
                                             artist.radius_preference,
-                                            artist_instruments)
+                                            artist_instruments,
+                                            artist_genres)
     render json: recommendations
   end
 
   def searchArtists
-    if request.headers['radius'] == '0' && request.headers['zipcode'] == ''
-      if request.headers['instruments'] != ''
-        instru_artists = geo_artists.select do |a|
-          artist_instruments = a.instruments.collect(&:name)
-          artist_instruments.any? { |instrument| request.headers['instruments'] == instrument }
-        end
-        if request.headers['genre'] != ''
-          genre_artists = instru_artists.select do |a|
-            artist_genres = a.genres.collect(&:name)
-            artist_genres.any? { |genre| genre == request.headers['genre'] }
-          end
-        end
-      end
-    else
-      geo_artists = Artists.near(request.headers['zipcode'], request.headers['radius'])
-      if request.headers['instruments'] != ''
-        instru_artists = geo_artists.select do |a|
-          artist_instruments = a.instruments.collect(&:name)
-          artist_instruments.any? { |instrument| request.headers['instruments'] == instrument }
-        end
-        if request.headers['genre'] != ''
-          genre_artists = instru_artists.select do |a|
-            artist_genres = a.genres.collect(&:name)
-            artist_genres.any? { |genre| genre == request.headers['genre'] }
-          end
-        end
-      end
-    end
-
-    render json: genre_artists
+    searched_artists = Artist.search_artists(request.headers[:zipcode],
+                                            request.headers[:radius],
+                                            request.headers[:instrument],
+                                            request.headers[:genre]
+                                            )
+    render json: searched_artists
   end
 
   private

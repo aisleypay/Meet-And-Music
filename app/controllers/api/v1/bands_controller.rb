@@ -45,8 +45,12 @@ class Api::V1::BandsController < ApplicationController
   end
 
   def searchBands
-
+    searched_bands = Band.search_bands(request.headers[:zipcode],
+                                       request.headers[:radius],
+                                       request.headers[:genre])
+    render json: searched_bands
   end
+
   private
 
   def band_params

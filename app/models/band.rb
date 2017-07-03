@@ -18,8 +18,44 @@ class Band < ApplicationRecord
     end
   end
 
-  def self.recommendedBands(coordinates, radius, artist_instruments)
+  def self.order_by_genres(artist_genres, bands)
+    sorted_bands = []
+
+    artist_genres.each_with_index do |genre1, idx1|
+      if idx1.zero?
+        bands.each_with_index do |a, idx2|
+          band_genres = a.genres.collect(&:name)
+          if band_genres[idx1] == genre1
+            sorted_artist = bands.delete_at(idx2)
+            sorted_bands.push(sorted_artist)
+          end
+        end
+
+      else
+        bands.each_with_index do |a, idx2|
+          band_genres = a.genres.collect(&:name)
+
+          if band_genres.slice(0, idx1).include?(genre1)
+            sorted_artist = bands.delete_at(idx2)
+            sorted_bands.push(sorted_artist)
+          end
+        end
+      end
+    end
+
+    sorted_bands.concat(bands)
+  end
+
+  def self.recommendedBands(coordinates, radius, artist_instruments, artist_genres)
     geographically_selected_bands = search_bands_by_radius(coordinates, radius)
-    selected_by_needed_instruments(geographically_selected_bands, artist_instruments)
+    instrument_selected_bands = selected_by_needed_instruments(geographically_selected_bands, artist_instruments)
+    order_by_genres(artist_genres, instrument_selected_bands)
+  end
+
+  def self.search_bands(zipcode, radius, genre)
+    selected_bands = search_bands_by_radius(zipcode, radius)
+    return selected_bands if genre == 'All'
+
+    selected_bands.select { |b| b.genres.collect(&:id).include?(genre.to_i) }
   end
 end
