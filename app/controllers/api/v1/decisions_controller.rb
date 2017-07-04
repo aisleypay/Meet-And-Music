@@ -9,7 +9,7 @@ class Api::V1::DecisionsController < ApplicationController
   def create
     decider = User.find_by_id(decision_params[:decider_attributes][:id])
     chosen = User.find_by_id(decision_params[:chosen_id].to_i)
-    decision = Decision.create(decider: decider, chosen: chosen, status: decision_params[:status])
+    decision = Decision.find_or_create_by(decider: decider, chosen: chosen, status: decision_params[:status])
     render json: decision
   end
 
