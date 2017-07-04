@@ -54,6 +54,11 @@ class Api::V1::ArtistsController < ApplicationController
     render json: searched_artists
   end
 
+  def featured
+    artists = Artist.all.sample(10)
+    render json: artists
+  end
+
   private
 
   def artist_params
@@ -65,6 +70,7 @@ class Api::V1::ArtistsController < ApplicationController
                                    :setList,
                                    :experience_in_years,
                                    :radius_preference,
+                                   :profile_pic,
                                    user_genres_attributes: %i[id genre_id],
                                    artist_instruments_attributes: %i[id instrument_id name],
                                    user_attributes: %i[id username password])

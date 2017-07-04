@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get 'artists/:id/recommended-Bands', to: 'artists#recommendedBands'
       get 'bands/search-bands', to: 'bands#searchBands'
       get 'artists/search-artists', to: 'artists#searchArtists'
+      get 'artists/featured', to: 'artists#featured'
+      get 'bands/featured', to: 'bands#featured'
       resources :artists
       resources :bands
       resources :users

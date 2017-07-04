@@ -10,6 +10,7 @@ class CreateBands < ActiveRecord::Migration[5.1]
       t.string :setList
       t.boolean :looking_for_musicians
       t.references :user
+      t.string :profile_pic
 
       t.timestamps
     end

@@ -51,6 +51,11 @@ class Api::V1::BandsController < ApplicationController
     render json: searched_bands
   end
 
+  def featured
+    bands = Band.all.sample(10)
+    render json: bands
+  end
+
   private
 
   def band_params
@@ -60,6 +65,7 @@ class Api::V1::BandsController < ApplicationController
                                  :zipcode,
                                  :setList,
                                  :radius_preference,
+                                 :profile_pic,
                                  band_instrument_preferences_attributes: %i[id instrument_id name],
                                  user_genres_attributes: %i[id genre_id],
                                  user_attributes: %i[id username password])
