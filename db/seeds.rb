@@ -2241,6 +2241,8 @@ band_pics = ['https://upload.wikimedia.org/wikipedia/commons/e/eb/Pavement%2C_th
 artist_pics = ['https://static.pexels.com/photos/387/man-person-wall-music.jpg',
                'https://static.pexels.com/photos/9687/pexels-photo.jpg',
                'http://orig01.deviantart.net/29a6/f/2010/011/d/7/music_angel_ii_by_angiestock.jpg']
+youtube_bands = ['https://www.youtube.com/embed/videoseries?list=PLJvQXRgtxlumwtxmRqBqQ9bWqW2Rkkxll',   'https://www.youtube.com/embed/videoseries?list=PLC5TsZX_kKtk1v1ZdMHxqpEXav0EsF_jh', 'https://www.youtube.com/embed/videoseries?list=PLdRTTdaMjP9w8qr-iwhahKRjWBNNDNm9X']
+youtube_artists = ['https://www.youtube.com/embed/videoseries?list=PL39354D07560C315A', 'https://www.youtube.com/embed/videoseries?list=PLgODikj5QTnZyKn6e9DiQ4XvN3dBDnKhT', 'https://www.youtube.com/embed/videoseries?list=PLzF2lckq8ay-0oTecAiCGd0FxxyCT8BA3']
 
 20.times do
   a = Artist.new(
@@ -2251,6 +2253,7 @@ artist_pics = ['https://static.pexels.com/photos/387/man-person-wall-music.jpg',
     looking_for_musicians: rand_boolean.sample,
     looking_for_band: true,
     radius_preference: rand(20..30),
+    youtube_playlist_link: youtube_artists.sample,
     age: Faker::Number.between(18, 90),
     experience_in_years: Faker::Number.between(1, 18),
     user_attributes: {
@@ -2278,6 +2281,7 @@ end
     zipcode: '07067',
     profile_pic: band_pics.sample,
     radius_preference: rand(20..30),
+    youtube_playlist_link: youtube_bands.sample,
     looking_for_musicians: true,
     user_attributes: {
       username: Faker::Internet.user_name + Faker::Space.constellation,

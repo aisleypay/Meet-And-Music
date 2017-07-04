@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170627201220) do
     t.boolean "looking_for_musicians"
     t.integer "radius_preference"
     t.string "profile_pic"
+    t.string "youtube_playlist_link"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,8 +62,9 @@ ActiveRecord::Schema.define(version: 20170627201220) do
     t.integer "radius_preference"
     t.string "setList"
     t.boolean "looking_for_musicians"
-    t.bigint "user_id"
     t.string "profile_pic"
+    t.string "youtube_playlist_link"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_bands_on_user_id"

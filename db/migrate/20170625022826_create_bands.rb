@@ -9,8 +9,9 @@ class CreateBands < ActiveRecord::Migration[5.1]
       t.integer :radius_preference
       t.string :setList
       t.boolean :looking_for_musicians
-      t.references :user
       t.string :profile_pic
+      t.string :youtube_playlist_link
+      t.references :user
 
       t.timestamps
     end

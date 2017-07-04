@@ -13,8 +13,9 @@ class CreateArtists < ActiveRecord::Migration[5.1]
       t.boolean :looking_for_musicians
       t.integer :radius_preference
       t.string :profile_pic
+      t.string :youtube_playlist_link
       t.references :user
-      
+
       t.timestamps
     end
   end
