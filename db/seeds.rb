@@ -5,6 +5,7 @@ genres = ['Classical',
           'Soul',
           'Hip Hop',
           'Jazz',
+          'Rap',
           'Latin',
           'Pop',
           'R&B',
@@ -21,6 +22,7 @@ genres = ['Classical',
           'Folk Rock',
           'Pop Rock',
           'Soft Rock',
+          'K-Pops'
           'Other']
 
 genres.each do |g|
@@ -2237,12 +2239,25 @@ rand_boolean = [true, false]
 
 band_pics = ['https://upload.wikimedia.org/wikipedia/commons/e/eb/Pavement%2C_the_band%2C_in_Tokyo.jpg',
              'https://static.pexels.com/photos/300333/pexels-photo-300333.jpeg',
-             'https://static.pexels.com/photos/111253/pexels-photo-111253.jpeg']
+             'https://static.pexels.com/photos/111253/pexels-photo-111253.jpeg', 'https://static.pexels.com/photos/417473/pexels-photo-417473.jpeg',
+           'https://static.pexels.com/photos/217026/pexels-photo-217026.jpeg', 'https://static.pexels.com/photos/164693/pexels-photo-164693.jpeg', 'https://static.pexels.com/photos/117501/pexels-photo-117501.jpeg', 'https://static.pexels.com/photos/348517/pexels-photo-348517.jpeg', 'https://static.pexels.com/photos/167484/pexels-photo-167484.jpeg']
+
 artist_pics = ['https://static.pexels.com/photos/387/man-person-wall-music.jpg',
                'https://static.pexels.com/photos/9687/pexels-photo.jpg',
-               'http://orig01.deviantart.net/29a6/f/2010/011/d/7/music_angel_ii_by_angiestock.jpg']
-youtube_bands = ['https://www.youtube.com/embed/videoseries?list=PLJvQXRgtxlumwtxmRqBqQ9bWqW2Rkkxll',   'https://www.youtube.com/embed/videoseries?list=PLC5TsZX_kKtk1v1ZdMHxqpEXav0EsF_jh', 'https://www.youtube.com/embed/videoseries?list=PLdRTTdaMjP9w8qr-iwhahKRjWBNNDNm9X']
-youtube_artists = ['https://www.youtube.com/embed/videoseries?list=PL39354D07560C315A', 'https://www.youtube.com/embed/videoseries?list=PLgODikj5QTnZyKn6e9DiQ4XvN3dBDnKhT', 'https://www.youtube.com/embed/videoseries?list=PLzF2lckq8ay-0oTecAiCGd0FxxyCT8BA3']
+               'https://static.pexels.com/photos/141376/pexels-photo-141376.jpeg', 'https://static.pexels.com/photos/186703/pexels-photo-186703.jpeg',
+             'https://static.pexels.com/photos/255437/pexels-photo-255437.jpeg',
+           'https://static.pexels.com/photos/25291/pexels-photo-25291.jpg',
+         'https://static.pexels.com/photos/34692/pexels-photo.jpg',
+       'https://static.pexels.com/photos/65717/pexels-photo-65717.jpeg', 'https://static.pexels.com/photos/26732/pexels-photo-26732.jpg',
+       'https://static.pexels.com/photos/64014/musician-france-paris-harp-64014.jpeg', 'https://static.pexels.com/photos/8988/pexels-photo.jpeg'
+     ]
+
+youtube_bands = ['https://www.youtube.com/embed/videoseries?list=PLJvQXRgtxlumwtxmRqBqQ9bWqW2Rkkxll',   'https://www.youtube.com/embed/videoseries?list=PLC5TsZX_kKtk1v1ZdMHxqpEXav0EsF_jh', 'https://www.youtube.com/embed/videoseries?list=PLdRTTdaMjP9w8qr-iwhahKRjWBNNDNm9X', "https://www.youtube.com/embed/videoseries?list=PL-Sa0y_pQ-C02PYJt49tT4G69Lrou4V5D",
+'"https://www.youtube.com/embed/videoseries?list=PLRREudXdLKZv49DcAzUvda552lsHMQlZf"' ]
+
+youtube_artists = ['https://www.youtube.com/embed/videoseries?list=PL39354D07560C315A', 'https://www.youtube.com/embed/videoseries?list=PLgODikj5QTnZyKn6e9DiQ4XvN3dBDnKhT', 'https://www.youtube.com/embed/videoseries?list=PLzF2lckq8ay-0oTecAiCGd0FxxyCT8BA3', "https://www.youtube.com/embed/videoseries?list=PLVOXUojQhsNogG-Mz_7EWwsKj-wzsjaoU",
+"https://www.youtube.com/embed/videoseries?list=PLYuz75ZV-NPDBQkU3Gn4QVGc44iNjbyXj",
+"https://www.youtube.com/embed/videoseries?list=PL-isJVuZZRKReyK1SzHis-6jFPMiNU_hM" ]
 
 20.times do
   a = Artist.new(
@@ -2254,8 +2269,8 @@ youtube_artists = ['https://www.youtube.com/embed/videoseries?list=PL39354D07560
     looking_for_band: true,
     radius_preference: rand(20..30),
     youtube_playlist_link: youtube_artists.sample,
-    age: Faker::Number.between(18, 90),
-    experience_in_years: Faker::Number.between(1, 18),
+    age: Faker::Number.between(18, 50),
+    experience_in_years: Faker::Number.between(1, 15),
     user_attributes: {
       username: (Faker::Space.nebula + Faker::Superhero.name).split(' ').join('_'),
       password: 'faker'
