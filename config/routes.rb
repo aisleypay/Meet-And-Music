@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :users
       resources :instruments, only: [:index]
       resources :genres, only: [:index]
-      resources :decisions, only: [:create]
+      resources :decisions, only: [:create, :index]
     end
   end
 end

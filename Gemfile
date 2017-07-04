@@ -10,7 +10,7 @@ gem 'faker', '~> 1.6.4'
 gem 'figaro'
 gem 'jwt'
 gem 'active_model_serializers'
-gem 'devise'
+gem 'premailer-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
