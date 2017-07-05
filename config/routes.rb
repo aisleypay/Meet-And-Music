@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'artists/search-artists', to: 'artists#search_artists'
       get 'artists/featured', to: 'artists#featured'
       get 'bands/featured', to: 'bands#featured'
+      post 'users/:id/reach-out', to: 'users#reach_out'
       resources :artists
       resources :bands
       resources :users

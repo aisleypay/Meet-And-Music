@@ -2273,7 +2273,8 @@ youtube_artists = ['https://www.youtube.com/embed/videoseries?list=PL39354D07560
     experience_in_years: Faker::Number.between(1, 15),
     user_attributes: {
       username: (Faker::Space.nebula + Faker::Superhero.name).split(' ').join('_'),
-      password: 'faker'
+      password: 'faker',
+      email: 'meetmusiclife@gmail.com'
     }
   )
 
@@ -2300,7 +2301,8 @@ end
     looking_for_musicians: true,
     user_attributes: {
       username: Faker::Internet.user_name + Faker::Space.constellation,
-      password: 'faker'
+      password: 'faker',
+      email: 'meetmusiclife@gmail.com'
     }
   )
 
