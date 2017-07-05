@@ -33,7 +33,7 @@ class Api::V1::ArtistsController < ApplicationController
     render json: artist
   end
 
-  def recommendedBands
+  def recommended_bands
     artist = Artist.find(params[:id])
     artist_coor = [artist.latitude, artist.longitude]
     artist_instruments = artist.instruments.collect(&:name)
@@ -45,7 +45,7 @@ class Api::V1::ArtistsController < ApplicationController
     render json: recommendations
   end
 
-  def searchArtists
+  def search_artists
     searched_artists = Artist.search_artists(request.headers[:zipcode],
                                             request.headers[:radius],
                                             request.headers[:instrument],
@@ -71,6 +71,7 @@ class Api::V1::ArtistsController < ApplicationController
                                    :experience_in_years,
                                    :radius_preference,
                                    :profile_pic,
+                                   :youtube_playlist_link,
                                    user_genres_attributes: %i[id genre_id],
                                    artist_instruments_attributes: %i[id instrument_id name],
                                    user_attributes: %i[id username password])
