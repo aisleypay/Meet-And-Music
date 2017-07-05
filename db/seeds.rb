@@ -22,7 +22,7 @@ genres = ['Classical',
           'Folk Rock',
           'Pop Rock',
           'Soft Rock',
-          'K-Pops'
+          'K-Pops',
           'Other']
 
 genres.each do |g|
