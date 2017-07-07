@@ -2259,6 +2259,97 @@ youtube_artists = ['https://www.youtube.com/embed/videoseries?list=PL39354D07560
 "https://www.youtube.com/embed/videoseries?list=PLYuz75ZV-NPDBQkU3Gn4QVGc44iNjbyXj",
 "https://www.youtube.com/embed/videoseries?list=PL-isJVuZZRKReyK1SzHis-6jFPMiNU_hM" ]
 
+setlist1 = "Brown Eyed Girl Van Morrison\n
+Old Time Rock and Roll Bob Seger\n
+Sweet Home Alabama Lynard Skynard\n
+Pretty Woman Roy Orbison\n
+Mony Mony Billy Idol\n
+I Love Rock and Roll Joan Jett\n
+Pour Some Sugar On Me Def Leppard\n
+Wonderful Tonight Eric Clapton\n
+What I Like About You Romantics\n
+Taking Care of Business Bachman Turner Overdrive\n
+Jump Jive and Wail Brian Setzer\n
+AC/DC You Shook Me All Night Long\n
+Adams, Bryan Summer Of '69\n
+Springfield, Rick Jessie's Girl\n
+Queen Crazy Little Thing Called Love\n
+Guns N' Roses Sweet Child O' Mine\n
+Violent Femmes Blister In The Sun\n
+Idol, Billy White Wedding\n
+Dion Runaround Sue\n
+Aerosmith Walk This Way\n
+Eagles Hotel California\n
+Beach Boys Kokomo\n
+Simon & Garfunkel Cecilia\n
+Beatles All You Need Is Love\n
+Beatles I Saw Her Standing There\n
+Morrison, Van Moondance\n
+Prince Let's Go Crazy\n
+Beatles In My Life"
+
+setlist2 = "Bertha -Grateful Dead\n
+Blue Sky - ABB\n
+Dead Flowers - Stones\n
+Mama Tried - Merle Haggard\n
+Into the Mystic - Van Morrison\n
+River Run - The Radiators\n
+Fat Man in the Bathtub - Little Feat\n
+Ramblin Man - ABB\n
+Truckin - GD\n
+GDTRFB - GD\n
+One Way Out -ABB\n
+Outside Woman Blues - Cream\n
+Honky Tonk Women - Stones\n
+Honey Don't - Beatles\n
+Dixie Chicken - Little Feat\n
+Psychotic Reaction - Count Five\n
+Casey Jones - GD\n
+You Don't Love Me - ABB\n
+I Ain't Superstitious - Howlin Wolf\n
+Spoonful - Willie Dixon\n
+Killin Floor - Howlin Wolf\n
+My Babe - Little Walter/Willie Dixon\n
+Momma Don't 'low - Trad?\n
+Last Train from Poor Valley - Norman Blake\n
+Slow Down - Beatles\n
+Born on the Bayou - CCR\n
+Green River - CCR\n
+Smokestack Lightnin' - Mister Chester Burnett\n
+Hard To Handle - Otis Redding\n
+Yankee Lady - Jesse Winchester\n
+I Still Miss Someone - Johnny Cash\n
+El Paso - Marty Robbins\n
+Workin' Man Blues - Merle\n
+Big River - Merle\n
+Jessica - ABB\n
+I Know You Rider - GD"
+
+setlist3 = "AMERICAN GIRL\n
+HANDS TO YOURSELF\n
+I&#8217;M THE MAN\n
+EVERY BREATH YOU TAKE\n
+BLACK COFFEE IN BED\n
+MESSAGE IN A BOTTLE\n
+ROCK THIS TOWN\n
+YOU MAY BE RIGHT\n
+AUTHORITY SONG\n
+AMERICAN GIRL\n
+BEST FRIEND&#8217;S GIRL\n
+BLISTER IN THE SUN\n
+HURTS SO GOOD\n
+COLD SHOT\n
+JENNY 867-5309\n
+I WANT YOU TO WANT ME\n
+JESSIE&#8217;S GIRL\n
+SHOOK ME ALL NIGHT LONG\n
+ANYWAY YOU WANT IT\n
+CRAZY TRAIN\n
+TALK DIRTY TO ME\n
+CULT OF PERSONALITY"
+
+setlists = [setlist1, setlist2, setlist3]
+
 20.times do
   a = Artist.new(
     name: Faker::Name.name,
@@ -2270,6 +2361,7 @@ youtube_artists = ['https://www.youtube.com/embed/videoseries?list=PL39354D07560
     radius_preference: rand(20..30),
     youtube_playlist_link: youtube_artists.sample,
     age: Faker::Number.between(18, 50),
+    setList: setlists.sample,
     experience_in_years: Faker::Number.between(1, 15),
     user_attributes: {
       username: (Faker::Space.nebula + Faker::Superhero.name).split(' ').join('_'),
@@ -2299,6 +2391,7 @@ end
     radius_preference: rand(20..30),
     youtube_playlist_link: youtube_bands.sample,
     looking_for_musicians: true,
+    setList: setlists.sample,
     user_attributes: {
       username: Faker::Internet.user_name + Faker::Space.constellation,
       password: 'faker',
