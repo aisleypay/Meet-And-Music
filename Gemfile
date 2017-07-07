@@ -11,6 +11,7 @@ gem 'figaro'
 gem 'jwt'
 gem 'active_model_serializers'
 gem 'premailer-rails'
+gem 'rails_12factor', group: :production
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
